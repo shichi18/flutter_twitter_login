@@ -1,5 +1,4 @@
 import 'package:flutter/material.dart';
-import 'package:flutter/services.dart';
 import 'package:flutter_twitter_login/flutter_twitter_login.dart';
 
 void main() => runApp(new MyApp());
@@ -23,7 +22,7 @@ class _MyAppState extends State<MyApp> {
 
     switch (result.status) {
       case TwitterLoginStatus.loggedIn:
-        newMessage = 'Logged in! username: ${result.session.username}';
+        newMessage = 'Logged in! username: ${result.session!.username}';
         break;
       case TwitterLoginStatus.cancelledByUser:
         newMessage = 'Login cancelled by user.';
