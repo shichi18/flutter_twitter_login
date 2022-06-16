@@ -1,15 +1,17 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_twitter_login/flutter_twitter_login.dart';
 
-void main() => runApp(new MyApp());
+void main() => runApp(const MyApp());
 
 class MyApp extends StatefulWidget {
+  const MyApp({Key? key}) : super(key: key);
+
   @override
-  _MyAppState createState() => new _MyAppState();
+  _MyAppState createState() => _MyAppState();
 }
 
 class _MyAppState extends State<MyApp> {
-  static final TwitterLogin twitterLogin = new TwitterLogin(
+  static final TwitterLogin twitterLogin = TwitterLogin(
     consumerKey: 'kkOvaF1Mowy4JTvCxKTV5O1WF',
     consumerSecret: 'ZECGsI6UUDBEUVGkJe4S5vd0FGqGxC3wMJCgsXgPRfjSwRFnyH',
   );
@@ -18,22 +20,22 @@ class _MyAppState extends State<MyApp> {
 
   void _login() async {
     final TwitterLoginResult result = await twitterLogin.authorize();
-    String newMessage;
+    String Message;
 
     switch (result.status) {
       case TwitterLoginStatus.loggedIn:
-        newMessage = 'Logged in! username: ${result.session!.username}';
+        Message = 'Logged in! username: ${result.session!.username}';
         break;
       case TwitterLoginStatus.cancelledByUser:
-        newMessage = 'Login cancelled by user.';
+        Message = 'Login cancelled by user.';
         break;
       case TwitterLoginStatus.error:
-        newMessage = 'Login error: ${result.errorMessage}';
+        Message = 'Login error: ${result.errorMessage}';
         break;
     }
 
     setState(() {
-      _message = newMessage;
+      _message = Message;
     });
   }
 
@@ -47,22 +49,22 @@ class _MyAppState extends State<MyApp> {
 
   @override
   Widget build(BuildContext context) {
-    return new MaterialApp(
-      home: new Scaffold(
-        appBar: new AppBar(
-          title: new Text('Twitter login sample'),
+    return MaterialApp(
+      home: Scaffold(
+        appBar: AppBar(
+          title: Text('Twitter login sample'),
         ),
-        body: new Center(
-          child: new Column(
+        body: Center(
+          child: Column(
             mainAxisAlignment: MainAxisAlignment.center,
             children: <Widget>[
-              new Text(_message),
-              new RaisedButton(
-                child: new Text('Log in'),
+              Text(_message),
+              RaisedButton(
+                child: Text('Log in'),
                 onPressed: _login,
               ),
-              new RaisedButton(
-                child: new Text('Log out'),
+              RaisedButton(
+                child: Text('Log out'),
                 onPressed: _logout,
               ),
             ],
